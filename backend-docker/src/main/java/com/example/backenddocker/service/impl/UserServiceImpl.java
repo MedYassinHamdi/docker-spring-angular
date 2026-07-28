@@ -7,6 +7,7 @@ import com.example.backenddocker.entity.User;
 import com.example.backenddocker.repository.UserRepository;
 import com.example.backenddocker.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -18,13 +19,14 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserResponseDTO create(UserRequestDTO dto) {
         User user = User.builder()
                 .username(dto.getUsername())
                 .email(dto.getEmail())
-                .password(dto.getPassword()) // hash later once security is added
+                .password(passwordEncoder.encode(dto.getPassword()))
                 .fullName(dto.getFullName())
                 .roles(new HashSet<>(List.of(Role.ROLE_USER)))
                 .build();
