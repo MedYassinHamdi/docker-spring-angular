@@ -1,0 +1,15 @@
+# --- Angular / Frontend ---
+frontend-docker/node_modules/
+frontend-docker/dist/
+frontend-docker/.angular/
+
+# --- Spring Boot / Backend ---
+backend-docker/target/
+backend-docker/.mvn/
+backend-docker/.idea/
+*.iml
+
+# --- General / OS ---
+.DS_Store
+Thumbs.db
+.vscode/
