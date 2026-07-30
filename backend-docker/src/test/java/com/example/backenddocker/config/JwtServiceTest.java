@@ -1,16 +1,16 @@
 package com.example.backenddocker.config;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 class JwtServiceTest {
 
-    @Autowired
-    private JwtService jwtService;
+    // Hardcoded test secret (must be a valid Base64 string for HS256)
+    private static final String TEST_SECRET = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970337336763979244226452948404D635166546A576E5A7234753778214125442A47";
+    private static final long TEST_EXPIRATION = 86400000; // 24 hours
+
+    private final JwtService jwtService = new JwtService(TEST_SECRET, TEST_EXPIRATION);
 
     @Test
     void shouldGenerateNonNullToken() {

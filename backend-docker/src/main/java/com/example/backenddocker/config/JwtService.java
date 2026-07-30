@@ -16,11 +16,14 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    @Value("${app.jwt.secret}")
-    private String secretKey;
+    private final String secretKey;
 
-    @Value("${app.jwt.expiration}")
-    private long jwtExpiration;
+    private final long jwtExpiration;
+
+    public JwtService(@Value("${app.jwt.secret}") String secretKey, @Value("${app.jwt.expiration}") long jwtExpiration) {
+        this.secretKey = secretKey;
+        this.jwtExpiration = jwtExpiration;
+    }
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
